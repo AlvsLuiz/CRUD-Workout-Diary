@@ -74,9 +74,9 @@ public class MySQLWorkoutDAO implements WorkoutDAO {
 
         List<Workout> workouts = new ArrayList<>();
 
-        String sql = "SELECT w.*, u.name AS user_name "
+        String sql = "SELECT w.*, u.nome AS user_name "
                 + "FROM workout w "
-                + "INNER JOIN user u ON w.user_id = u.id "
+                + "INNER JOIN users u ON w.user_id = u.id "
                 + "ORDER BY w.id";
 
         db.createStatement();

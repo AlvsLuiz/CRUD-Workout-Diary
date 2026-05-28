@@ -40,16 +40,19 @@
 
         </div>
 
-        <form action="${pageContext.request.contextPath}
-            <c:choose>
-                <c:when test='${not empty workout}'>
-                    /workout/update
-                </c:when>
-                <c:otherwise>
-                    /workout/insert
-                </c:otherwise>
-            </c:choose>"
-            method="post">
+        <c:if test="${not empty workout}">
+
+            <form action="${pageContext.request.contextPath}/workout/update"
+                  method="post">
+
+        </c:if>
+
+        <c:if test="${empty workout}">
+
+            <form action="${pageContext.request.contextPath}/workout/insert"
+                  method="post">
+
+        </c:if>
 
             <c:if test="${not empty workout}">
 

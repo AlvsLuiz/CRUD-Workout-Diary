@@ -39,21 +39,21 @@ public class WorkoutController extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getRequestURI();
+        String action = request.getServletPath();
 
         switch (action) {
 
-        case "/CRUDWorkoutDiary/workouts":
+            case "/workouts":
                 listWorkouts(request);
                 forward(request, response, "/workouts.jsp");
                 break;
 
-            case "/CRUDWorkoutDiary/workout/form":
+            case "/workout/form":
                 showForm(request);
                 forward(request, response, "/form-workout.jsp");
                 break;
 
-            case "/CRUDWorkoutDiary/workout/update":
+            case "/workout/update":
                 showUpdateForm(request);
                 forward(request, response, "/form-workout.jsp");
                 break;
@@ -70,19 +70,19 @@ public class WorkoutController extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getRequestURI();
+        String action = request.getServletPath();
 
         switch (action) {
 
-            case "/CRUDWorkoutDiary/workout/insert":
+            case "/workout/insert":
                 insertWorkout(request, response);
                 break;
 
-            case "/CRUDWorkoutDiary/workout/update":
+            case "/workout/update":
                 updateWorkout(request, response);
                 break;
 
-            case "/CRUDWorkoutDiary/workout/delete":
+            case "/workout/delete":
                 deleteWorkout(request, response);
                 break;
 
@@ -97,14 +97,19 @@ public class WorkoutController extends HttpServlet {
 
         try {
 
+            System.out.println("ENTROU NO listWorkouts");
+
             List<Workout> workouts =
                     workoutDAO.listAll();
+
+            System.out.println("Quantidade: " + workouts.size());
 
             request.setAttribute(
                     "workouts",
                     workouts);
 
         } catch (ModelException e) {
+
             e.printStackTrace();
         }
     }
