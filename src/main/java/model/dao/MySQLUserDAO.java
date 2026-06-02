@@ -9,116 +9,162 @@ import model.User;
 
 public class MySQLUserDAO implements UserDAO {
 
-	@Override
-	public boolean save(User user) throws ModelException {
-		
-		DBHandler db = new DBHandler();
-		
-		String sqlInsert = "INSERT INTO users VALUES "
-				+ " (DEFAULT, ?, ?, ?);";
-		
-		db.prepareStatement(sqlInsert);
-		db.setString(1, user.getName());
-		db.setString(2, user.getGender());
-		db.setString(3, user.getEmail());
-		  
-		return db.executeUpdate() > 0;
-	}
+    @Override
+    public boolean save(User user) throws ModelException {
 
-	@Override
-	public boolean update(User user) throws ModelException {
-		
-		DBHandler db = new DBHandler();
-		
-		String sqlUpdate = "UPDATE users "
-				         	+ "SET nome = ?, "
-				         	+ "sexo = ?, "
-				         	+ "email = ? "
-				         + "WHERE id = ?";
-		
-		
-		db.prepareStatement(sqlUpdate);
-		
-		db.setString(1, user.getName());
-		db.setString(2, user.getGender());
-		db.setString(3, user.getEmail());
-		db.setInt(4, user.getId());
-		
-		return db.executeUpdate() > 0;
-	}
+        DBHandler db = new DBHandler();
 
-	@Override
-	public boolean delete(User user) throws ModelException {
-		
-		DBHandler db = new DBHandler();
-		
-		String sqlDelete = " DELETE FROM users "
-		                 + " WHERE id = ?;";
+        String sqlInsert =
+                "INSERT INTO users "
+                + "(nome, sexo, email, password) "
+                + "VALUES (?, ?, ?, ?)";
 
-		db.prepareStatement(sqlDelete);		
-		db.setInt(1, user.getId());
-		
-		try {
-			
-			return db.executeUpdate() > 0;
-			
-		} catch (ModelException e) {
-			if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
-				return false;
-			}
-			
-			throw e; 
-		}
-	}
+        db.prepareStatement(sqlInsert);
 
-	@Override
-	public List<User> listAll() throws ModelException {
-	
-		DBHandler db = new DBHandler();
-		
-		List<User> users = new ArrayList<User>();
-			
-		// Declara um instrução SQL
-		String sqlQuery = "SELECT * FROM users";
-		
-		db.createStatement();
-	
-		db.executeQuery(sqlQuery);
+        db.setString(1, user.getName());
+        db.setString(2, user.getGender());
+        db.setString(3, user.getEmail());
+        db.setString(4, user.getPassword());
 
-		while (db.next()) {
-			User u = createUser(db);
-			users.add(u);
-		}
-		
-		return users;
-	}
+        return db.executeUpdate() > 0;
+    }
 
-	@Override
-	public User findById(int id) throws ModelException {
-		
-		DBHandler db = new DBHandler();
-				
-		String sql = "SELECT * FROM users WHERE id = ?";
-		
-		db.prepareStatement(sql);
-		db.setInt(1, id);
-		db.executeQuery();
-		
-		User u = null;
-		while (db.next()) {
-			u = createUser(db);
-			break;
-		}
-		
-		return u;
-	}
-	
-	private User createUser(DBHandler db) throws ModelException {
-		User u = new User(db.getInt("id"));
-		u.setName(db.getString("nome"));
-		u.setGender(db.getString("sexo"));
-		u.setEmail(db.getString("email"));
-		
-		return u;
-	}
+    @Override
+    public boolean update(User user) throws ModelException {
+
+        DBHandler db = new DBHandler();
+
+        String sqlUpdate =
+                "UPDATE users "
+                + "SET nome = ?, "
+                + "sexo = ?, "
+                + "email = ? "
+                + "WHERE id = ?";
+
+        db.prepareStatement(sqlUpdate);
+
+        db.setString(1, user.getName());
+        db.setString(2, user.getGender());
+        db.setString(3, user.getEmail());
+        db.setInt(4, user.getId());
+
+        return db.executeUpdate() > 0;
+    }
+
+    @Override
+    public boolean delete(User user) throws ModelException {
+
+        DBHandler db = new DBHandler();
+
+        String sqlDelete =
+                "DELETE FROM users "
+                + "WHERE id = ?";
+
+        db.prepareStatement(sqlDelete);
+        db.setInt(1, user.getId());
+
+        try {
+
+            return db.executeUpdate() > 0;
+
+        } catch (ModelException e) {
+
+            if (e.getCause()
+                    instanceof SQLIntegrityConstraintViolationException) {
+
+                return false;
+            }
+
+            throw e;
+        }
+    }
+
+    @Override
+    public List<User> listAll() throws ModelException {
+
+        DBHandler db = new DBHandler();
+
+        List<User> users = new ArrayList<>();
+
+        String sqlQuery =
+                "SELECT * FROM users";
+
+        db.createStatement();
+        db.executeQuery(sqlQuery);
+
+        while (db.next()) {
+
+            User u = createUser(db);
+
+            users.add(u);
+        }
+
+        return users;
+    }
+
+    @Override
+    public User findById(int id) throws ModelException {
+
+        DBHandler db = new DBHandler();
+
+        String sql =
+                "SELECT * FROM users WHERE id = ?";
+
+        db.prepareStatement(sql);
+
+        db.setInt(1, id);
+
+        db.executeQuery();
+
+        User u = null;
+
+        while (db.next()) {
+
+            u = createUser(db);
+
+            break;
+        }
+
+        return u;
+    }
+
+    @Override
+    public User findByEmail(String email)
+            throws ModelException {
+
+        DBHandler db = new DBHandler();
+
+        String sql =
+                "SELECT * FROM users WHERE email = ?";
+
+        db.prepareStatement(sql);
+
+        db.setString(1, email);
+
+        db.executeQuery();
+
+        User user = null;
+
+        while (db.next()) {
+
+            user = createUser(db);
+
+            break;
+        }
+
+        return user;
+    }
+
+    private User createUser(DBHandler db)
+            throws ModelException {
+
+        User u = new User(db.getInt("id"));
+
+        u.setName(db.getString("nome"));
+        u.setGender(db.getString("sexo"));
+        u.setEmail(db.getString("email"));
+        u.setPassword(db.getString("password"));
+
+        return u;
+    }
 }
