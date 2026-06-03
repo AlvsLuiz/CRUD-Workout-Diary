@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users(
     nome VARCHAR(150) NOT NULL,
     sexo ENUM('M', 'F'),
     email VARCHAR(150) NOT NULL,
-    password VARCHAR(255) NOT NULL;
+    password VARCHAR(255) NOT NULL
     
 );
 
