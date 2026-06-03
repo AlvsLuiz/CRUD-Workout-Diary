@@ -5,43 +5,47 @@
 
 <head>
 
-    <%@include file="base-head.jsp"%>
+    <meta charset="UTF-8">
+
+    <title>Workout Diary - Cadastro</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
 </head>
 
-<body style="background-color:#f5f5f5;">
+<body class="bg-light">
 
 <div class="container">
 
-    <div class="row">
+    <div class="row justify-content-center mt-5">
 
-        <div class="col-md-4 col-md-offset-4"
-             style="margin-top:80px;">
+        <div class="col-md-4">
 
-            <div class="panel panel-danger">
+            <div class="card shadow">
 
-                <div class="panel-heading text-center">
+                <div class="card-header bg-secondary text-white text-center">
 
-                    <h3 class="panel-title">
+                    <h3 class="mb-0">
                         Workout Diary
                     </h3>
 
                 </div>
 
-                <div class="panel-body">
+                <div class="card-body">
 
-                    <h4 class="text-center">
+                    <h4 class="text-center mb-4">
                         Criar Conta
                     </h4>
-
-                    <hr>
 
                     <form action="${pageContext.request.contextPath}/register"
                           method="POST">
 
-                        <div class="form-group">
+                        <div class="mb-3">
 
-                            <label>Nome</label>
+                            <label class="form-label">
+                                Nome
+                            </label>
 
                             <input type="text"
                                    name="name"
@@ -50,9 +54,11 @@
 
                         </div>
 
-                        <div class="form-group">
+                        <div class="mb-3">
 
-                            <label>Email</label>
+                            <label class="form-label">
+                                Email
+                            </label>
 
                             <input type="email"
                                    name="email"
@@ -61,9 +67,11 @@
 
                         </div>
 
-                        <div class="form-group">
+                        <div class="mb-3">
 
-                            <label>Senha</label>
+                            <label class="form-label">
+                                Senha
+                            </label>
 
                             <input type="password"
                                    name="password"
@@ -73,7 +81,7 @@
                         </div>
 
                         <button type="submit"
-                                class="btn btn-danger btn-block">
+                                class="btn btn-danger w-100">
 
                             Cadastrar
 
@@ -81,18 +89,32 @@
 
                     </form>
 
-                    <hr>
-
-                    <div class="text-center">
+                    <div class="text-center mt-3">
 
                         <a href="${pageContext.request.contextPath}/login.jsp"
-                           class="btn btn-default">
+                           class="text-danger text-decoration-none">
 
                             Voltar para Login
 
                         </a>
 
                     </div>
+
+                    <%
+                    String erro = request.getParameter("erro");
+
+                    if ("true".equals(erro)) {
+                    %>
+
+                    <div class="alert alert-danger mt-3">
+
+                        Erro ao cadastrar usuário.
+
+                    </div>
+
+                    <%
+                    }
+                    %>
 
                 </div>
 

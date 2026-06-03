@@ -21,12 +21,20 @@
 
             <div class="card shadow">
 
-                <div class="bg-secondary card-header text-center">
-                    <h3>Workout Diary</h3>
+                <div class="card-header bg-secondary text-white text-center">
+
+                    <h3 class="mb-0">
+                        Workout Diary
+                    </h3>
+
                 </div>
 
                 <div class="card-body">
 
+					<h4 class="text-center mb-4">
+                        Login
+                    </h4>
+                    
                     <form action="${pageContext.request.contextPath}/login"
                           method="post">
 

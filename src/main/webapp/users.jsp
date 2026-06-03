@@ -30,10 +30,6 @@
 			            </span>
 			        </div>
 			    </div>
-			 
-			    <div class="col-md-3">
-			        <a href="/crud-manager/user/form" class="btn btn-danger pull-right h2"><span class="glyphicon glyphicon-plus" /></span>&nbspAdicionar Usuário</a>
-			    </div>
 	     	</div>
 	 
 	     	<hr />

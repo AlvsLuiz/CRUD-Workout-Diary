@@ -17,12 +17,12 @@
 		
 	 	 	<div id="top" class="row">
 	 			<div class="col-md-3">
-			        <h3>Empresas</h3>
+			        <h3>Academias</h3>
 			    </div>
 			 
 			    <div class="col-md-6">
 			        <div class="input-group h2">
-			            <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar empresas">
+			            <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar academias">
 			            <span class="input-group-btn">
 			                <button class="btn btn-danger" type="submit">
 			                    <span class="glyphicon glyphicon-search"></span>
@@ -32,7 +32,7 @@
 			    </div>
 			 
 			    <div class="col-md-3">
-			        <a href="/crud-manager/company/form" class="btn btn-danger pull-right h2"><span class="glyphicon glyphicon-plus" /></span>&nbspAdicionar Empresa</a>
+			        <a href="${pageContext.request.contextPath}/company/form" class="btn btn-danger pull-right h2"><span class="glyphicon glyphicon-plus" /></span>&nbspAdicionar Academia</a>
 			    </div>
 	     	</div>
 	 

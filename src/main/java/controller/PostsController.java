@@ -25,16 +25,16 @@ public class PostsController extends HttpServlet {
 	// Sobrescreve o método doGet, sendo capaz de responder métodos HTTP GET
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String action = req.getRequestURI();
+		String action = req.getServletPath();;
 		
 		switch (action) {
-		case "/crud-manager/post/form": {
+		case "/post/form": {
 			CommonsController.listUsers(req);
 			req.setAttribute("action", "insert");
 			ControllerUtil.forward(req, resp, "/form-post.jsp");
 			break;
 		}
-		case "/crud-manager/post/update": {
+		case "/post/update": {
 			CommonsController.listUsers(req);
 			Post p = loadPost(req);
 			req.setAttribute("post", p);
@@ -54,7 +54,7 @@ public class PostsController extends HttpServlet {
 	// Sobrescreve o método doPost, sendo capaz de responder métodos HTTP POST
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String action = req.getRequestURI();
+		String action = req.getServletPath();
 		
 		if (action == null || action.equals("") ) {
 			ControllerUtil.forward(req, resp, "/index.jsp");
@@ -62,14 +62,14 @@ public class PostsController extends HttpServlet {
 		}
 		
 		switch (action) {
-		case "/crud-manager/post/delete":
+		case "/post/delete":
 			deletePost(req, resp);
 			break;
-		case "/crud-manager/post/insert": {
+		case "/post/insert": {
 			insertPost(req, resp);
 			break;
 		}
-		case "/crud-manager/post/update": {
+		case "/post/update": {
 			updatePost(req, resp);
 			break;
 		}

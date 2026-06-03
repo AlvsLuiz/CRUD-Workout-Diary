@@ -32,7 +32,7 @@
 			    </div>
 			 
 			    <div class="col-md-3">
-			        <a href="${pageContext.request.contextPath}/posts/form" class="btn btn-danger pull-right h2">
+			        <a href="${pageContext.request.contextPath}/post/form" class="btn btn-danger pull-right h2">
 			        
 			        <span class="glyphicon glyphicon-plus" /></span>
 			        
